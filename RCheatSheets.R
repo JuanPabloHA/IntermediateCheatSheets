@@ -4,6 +4,7 @@
 ## vectors
 
 ## Matrices
+matrix(1:9, byrow = T, nrow = 3)
 
 matrix
 

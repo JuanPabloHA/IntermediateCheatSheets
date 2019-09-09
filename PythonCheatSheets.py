@@ -1,8 +1,14 @@
 # Introductory Cheat Sheets for Python
 
-## Loading datasets
+# Data Types
+## vectors
 
-## Basic EDA
+## Matrices
+
+
+# Loading datasets
+
+# Basic EDA
 
 ## Data wrangling and transformation
 

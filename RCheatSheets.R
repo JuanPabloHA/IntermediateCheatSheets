@@ -74,12 +74,56 @@ mat1[1:2, ] # will return the first and second rows of all columns
 mat5 <- mat1 * mat2 # will return the multiplication of both matrices element-wise
 mat5
 
+# LISTS! 
+## Finaly the last item in the list of basic data types are the lists! 
+## One of the characteristics of lists is that you can store many different types of information
+## including other lists. To build list you simply have to use the function "list()".
+
+my_list <- list(mat5, v4, mat2, v1)
+my_list 
+
+## In a similat way to the vectors, you can give names to the itmes that compose the list using the 
+## function "list()"
+
+names(my_list) <- c("uno", "dos", "tres", "cuatro")
+my_list
+
+## can select the different intems stored in the list by either using the "[[]]"  or the list$name notations
+my_list$uno
+
 # DATAFRAMES: In this section we introduce the Dataframes
 # As a data scientits you will constantly bee working with different types of data store in the same 
 # dataset, this format is known as DATAFRAME
 data(mtcars) # Load the mtcars dataset for the examples
 
 head(mtcars)
+
+# Loading libraries into R
+library(dplyr)
+
+# Filter, you can use filter when you wanna see only one subset of the observations
+# you can do this using the function filter and the pipe operator %>% 
+mtcars %>% filter(gear == 4, disp == 160)
+
+# Arrange, with the arrange verb you can sort the observations in a dataset in ascending or descinding order
+# this is usefull when you want to observe the extreme observations in a dataset.
+mtcars %>% arrange(gear)
+mtcars %>% arrange(desc(gear))
+
+# Mutate, is useful to change variables in dataset or create new variables, for this you have to use 
+# the %>% and the verb mutate()
+mtcars %>% mutate(uno = 3*gear)
+
+# Variable assignment
+mtcars2 <- mtcars %>% filter(gear==4)
+
+############################
+# Now that i have covered some of the basics I will start with the assigment itself
+# the first DATA SCIENCE TASK that i have found is the Instalation of usage of different libraries
+# to use a library you first have to install it, to do so we use the function "install.packages()"
+
+#install.packages("dplyr")
+#library(gapminder)
 
 ## INTRODUCTION TO EDA
 # First step
@@ -88,3 +132,30 @@ head(mtcars)
 ## Data wrangling and transformation
 
 ## Data visualisation
+# For data visualisation we will be using ggplot2 package the first step in this is using 
+# the install.packages("ggplot2") and then calling the library everytime you start a new R session
+library(ggplot2)
+
+# There are three parts for eevery ggplot graph:
+# 1: the data that you are going to use
+# 2: the mapping of variables from the variables to the aestetics
+# 3: you especify the type of graph that you are creating
+data(mtcars)
+ggplot(mtcars, aes(x = mpg, y = hp)) +
+    geom_point()
+
+## Extra options: 
+# Log scale: can be useful for cases when there are differences in scale, to use it you have to add an extra
+# option can can either be scale_x_log10() or scale_y_log10()
+
+# Additional aesthetics:
+# Color: To use the color aesthetic you have to include it in the aes part of the plot
+mtcars <- mtcars %>% mutate(gear = as.factor(gear))
+ggplot(mtcars, aes(x=mpg, y=hp, color= gear)) +
+    geom_point()
+
+# Size: Just like with color, yoiu have to add the size aesthetic inside the aes section
+ggplot(mtcars, aes(x=mpg, y=hp, color= gear, size = wt)) +
+    geom_point()
+
+# Faceting:

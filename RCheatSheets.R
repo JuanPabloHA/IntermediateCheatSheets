@@ -130,8 +130,24 @@ mtcars2 <- mtcars %>% filter(gear==4)
 
 
 ## Data wrangling and transformation
+# THE SUMMARIZE VERB, This is very useful to create custom dataframes
+mtcars %>% summarize(meanHp = mean(hp)) # simple summary 
 
-## Data visualisation
+# You can combine summarize with filter , Another built in functions that you can  use are:
+# mean, sum, median, max, min 
+mtcars %>% filter(gear == 3) %>%
+    summarize(meanHP = mean(hp), maxMPG = max(mpg))
+
+# THE GROUP_BY VERB
+## Summarizing by gear 
+mtcars %>% group_by(gear) %>% 
+    summarize(meanHP = mean(hp), maxMPG = max(mpg))
+
+# You can potentially also use the group_by verb in combination with filter
+
+##################################################################################
+############################### DATA VISUALISATION ###############################
+##################################################################################
 # For data visualisation we will be using ggplot2 package the first step in this is using 
 # the install.packages("ggplot2") and then calling the library everytime you start a new R session
 library(ggplot2)
@@ -158,4 +174,37 @@ ggplot(mtcars, aes(x=mpg, y=hp, color= gear)) +
 ggplot(mtcars, aes(x=mpg, y=hp, color= gear, size = wt)) +
     geom_point()
 
-# Faceting:
+# Faceting: Allows to dive plots into subplots, this is done using the function facet_wrap(~ var),
+# "~" this symbol usually represents BY. 
+ggplot(mtcars, aes(x=mpg, y=hp, color= gear, size = wt)) +
+    geom_point() +
+    facet_wrap(~ cyl)
+
+# Showing lower limits 
+ggplot(mtcars, aes(x=mpg, y=hp, color= gear, size = wt)) +
+    geom_point() +
+    expand_limits(y=0)
+
+# LINE PLOTS: Useful to show the change of one variable(s) over time
+# the difference with the scatter plot is that you call it using the argument "geom_line()" instead of "geom_point()"
+
+# BAR PLOTS: to create bar plots you have to use the "geom_col()" argument, col is short for column, unlike other plots, bar plots 
+# always start at 0
+by_cyl <- mtcars %>% group_by(cyl) %>%
+    summarize(meanMpg = mean(mpg))
+ggplot(by_cyl, aes(x = cyl, y = meanMpg)) +
+    geom_col()
+
+# HISTOGRAMS: Useful to investigate one dimension of the data at the time,  it is created using the argument "geom_histogram()" and 
+# only uses one argument x 
+# Hsitograms can also use the log scales for the axis in some cases to improve redability
+ggplot(mtcars, aes(x = mpg)) +
+    geom_histogram() # binwidth and bins arguments modify the appereace of the bins
+
+# BOX PLOTS: Useful to compare the distribution of one variable accross different cathegories
+# in some ocations, boxplots can also use log scales on the axis to improve readability 
+ggplot(mtcars, aes(x=gear , y = mpg)) +
+    geom_boxplot()
+
+# TITLES and other legends
+# the function "labs()" is very usefull to add, titles, subtitles, notes, legends and so on

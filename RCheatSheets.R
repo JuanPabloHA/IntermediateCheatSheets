@@ -208,3 +208,6 @@ ggplot(mtcars, aes(x=gear , y = mpg)) +
 
 # TITLES and other legends
 # the function "labs()" is very usefull to add, titles, subtitles, notes, legends and so on
+
+
+# HOLA JUAN PABLO 

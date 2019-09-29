@@ -1,5 +1,24 @@
 # Introductory Cheat Sheets for R
 
+setwd('/Users/temp/DSP/titanic/')
+
+titanic <- read.csv('train.csv')
+
+
+# Exploratory data analysis 
+head(titanic)
+str(titanic)
+summary(titanic)
+
+# Visual Exploratory data analysis:
+ggplot(titanic, aes(x=Age))+
+    geom_histogram()
+
+# Boxplots:
+ggplot(titanic, aes(x=Survived , y=Age)) +
+    geom_boxplot()
+
+
 # THE VERY BASICS: Data types
 # In the first part of the cheat sheets I will quickly cover the different basics of the data structures
 
@@ -211,3 +230,25 @@ ggplot(mtcars, aes(x=gear , y = mpg)) +
 
 
 # HOLA JUAN PABLO 
+# ASSERTIONS: are really cheap and cost nothing in compute time 
+# when creation an assertion you should also include a description in text of what the assertion is testing
+
+# In R you can also use assertio using the function stopifnot
+
+# CONSISTENT PROGRAMMING:
+## Formatting and white space
+## Minimise repetition by writting functions: you should consider writting a function when copying and 
+## pasting a line of code more than twice 
+
+# STYLE GIDES:
+## Python users should stick to PEP-008 and for R users style gide presented in hadley....
+## if you are a new python user stick to pandas and numpy as much as possible 
+
+# PACKAGING 
+## As your project grows and the number 
+
+# ASSESSING YOUR CODE REDABILLITY:
+## tje only valid measurement of code quality: WTFs/minute 
+
+## Read research code from good research companies (Google, Microsoft, Amazon)
+## See if you can make your old code in new computers

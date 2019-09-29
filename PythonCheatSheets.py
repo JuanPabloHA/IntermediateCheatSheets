@@ -1,4 +1,49 @@
 # Introductory Cheat Sheets for Python
+import pandas as pd 
+import matplotlib.pyplot as plt
+import os 
+
+# WORKING DIRECTORY
+cwd = os.getcwd()
+print(cwd)
+
+# Change workign directory
+os.chdir('/Users/temp/DSP/titanic/')
+
+# LOAD CSV DATA
+titanic = pd.read_csv('train.csv')
+
+# Exploratory Data Analysis: 
+## What questions are you trying to solve?
+## What kind of data do you have?
+## What is missing from the data
+
+titanic.head()
+titanic.info()
+titanic.describe()
+
+# Value counts
+print(titanic['Pclass'].value_counts(dropna=False))
+
+# Visual Exploratory data analysis:
+titanic['Age'].plot(kind = 'hist')
+plt.show()
+
+# Boxplots
+titanic.boxplot(column='Age', by='Survived')
+plt.show()
+
+# Creating new columns 
+titanic['uno'] = 'uno'
+
+# Deleting columns
+titanic = titanic.drop('uno', axis=1)
+
+# filtering data set    
+titanic[(titanic.Age>=30) & (titanic.Survived==1)]
+
+assert pd.notnull(titanic).all().all(), ('Missing values')
+
 
 # PYTHON  AS A CALCULATOR
 one = 1
